@@ -58,6 +58,6 @@ public class RoundManager : MonoBehaviour
 
     public void Player2End()
     {
-        Playe1Round()
+        Playe1Round();
     }
 }

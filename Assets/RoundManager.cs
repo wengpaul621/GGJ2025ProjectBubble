@@ -25,6 +25,7 @@ public class RoundManager : MonoBehaviour
 
     private float timer;
 
+    public float break_time = 3f;
     public LineMove line;
     bool isGaming=false;
     private void Awake()
@@ -67,7 +68,7 @@ public class RoundManager : MonoBehaviour
     public void Playe1Round()
     {
         isGaming = true;
-        attackSide = AttackSide.Player1;
+        
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
         timer = countdownTime; // Reset the timer for the new round
@@ -84,7 +85,7 @@ public class RoundManager : MonoBehaviour
 
     void Playe2Round()
     {
-        attackSide = AttackSide.Player2;
+        
         FieldPlayer1.SetActive(false);
         FieldPlayer2.SetActive(true);
         timer = countdownTime; // Reset the timer for the new round
@@ -121,11 +122,37 @@ public class RoundManager : MonoBehaviour
         Debug.Log("Countdown finished!");
         if (attackSide == AttackSide.Player1)
         {
-            Player1End(); // Switch to Player 2
+            StartCoroutine(StartTimer(break_time, 0));
         }
         else if (attackSide == AttackSide.Player2)
         {
-            Player2End(); // Switch to Player 1
+            StartCoroutine(StartTimer(break_time, 1));
         }
+    }
+
+    IEnumerator StartTimer(float duration, int player)
+    {
+        Debug.Log("Timer started...");
+        isGaming = false;
+        if (player == 0)
+        {
+            attackSide = AttackSide.Player2;
+        }
+        else
+        {
+            attackSide = AttackSide.Player1;
+        }
+        yield return new WaitForSeconds(duration);
+        Debug.Log("3 seconds passed!");
+        isGaming = true;
+        if (player == 0)
+        {
+            Player1End();
+        }
+        else
+        {
+            Player2End();
+        }
+        // Add actions to execute after the timer ends
     }
 }

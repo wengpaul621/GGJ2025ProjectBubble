@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7490694908855301607}
   - component: {fileID: 3257594009272476919}
   - component: {fileID: 3693765792823111210}
-  - component: {fileID: 4015717011221556271}
+  - component: {fileID: -4758024512705304664}
   m_Layer: 0
   m_Name: Bubbles_0
-  m_TagString: Circle
+  m_TagString: GeneratedItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.08211003}
   serializedVersion: 2
   m_Radius: 3.1271787
---- !u!114 &4015717011221556271
+--- !u!114 &-4758024512705304664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,3 +164,4 @@ MonoBehaviour:
   minPosition: {x: -5, y: -5}
   maxPosition: {x: 5, y: 5}
   wallDuration: 2
+  animator: {fileID: 0}

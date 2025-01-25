@@ -28,7 +28,7 @@ public class ColaLauncher : MonoBehaviour
     }
     void Update()
     {
-        launchObjInfos[0].objCount = new Vector2Int((int)(drink.pressure * 0.0005), (int)(drink.pressure * 0.002));
+        launchObjInfos[0].objCount = new Vector2Int((int)(drink.pressure * 0.0005), (int)(drink.pressure * 0.001));
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Launch();

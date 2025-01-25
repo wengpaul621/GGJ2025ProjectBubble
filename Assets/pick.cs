@@ -25,20 +25,20 @@ public class Circle : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Circle"))
+        if (collision.CompareTag("Player"))
         {
-            animator.SetTrigger("Break");
+            //animator.SetTrigger("Break");
             Debug.Log("take");
-            Destroy(collision.gameObject);
-            effect = Random.Range(0, 2);
-            if (effect > 0)
-            {
-                StartCoroutine(ApplyBuff());
-            }
-            else
-            {
-                GenerateWall();
-            }
+            Destroy(gameObject);
+            //effect = Random.Range(0, 2);
+            //if (effect > 0)
+            //{
+            //    StartCoroutine(ApplyBuff());
+            //}
+            //else
+            //{
+            //    GenerateWall();
+            //}
         }
     }
 

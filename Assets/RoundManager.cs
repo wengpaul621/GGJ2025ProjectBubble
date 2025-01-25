@@ -101,7 +101,12 @@ public class RoundManager : MonoBehaviour
     {
 
         if (isGameEnd == true) return;
-
+        // 停止倒计时协程
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+            countdownCoroutine = null; // 确保协程引用被清空
+        }
         isGameEnd = true;
         if(P1Defend.currentHealth > 0)
         {

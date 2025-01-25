@@ -111,7 +111,7 @@ public class Drink : MonoBehaviour
         }
 
         // 使用全局坐标系移动
-        transform.Translate(Vector3.up * moveDirection * moveSpeed * Time.deltaTime, Space.World);
+        transform.parent.Translate(Vector3.up * moveDirection * moveSpeed * Time.deltaTime, Space.World);
     }
 
 

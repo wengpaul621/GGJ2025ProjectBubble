@@ -5,7 +5,7 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     // Start is called before the first frame update
-    public defend player;
+    public Defend player;
     private int effect;
     private float speedUpDuration = 2f;
     public void OnTriggerEnter2D(Collider2D collision)

@@ -1,24 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static Drink;
 
-public class defend : MonoBehaviour
+public class Defend : MonoBehaviour
 {
-    public float moveSpeed = 3f; // ���ʳt��
+    public float moveSpeed = 3f; // Movement speed
     public float currentHealth;
     public float maxHealth;
 
     public HealthSystem healthBar;
     private Vector2 movement;
     public PlayerType playerType;
+
     void Start()
     {
-
         maxHealth = 100;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth); // Ensure this is implemented in your HealthSystem class
         SetMoveSpeed(moveSpeed);
     }
 
@@ -26,6 +24,8 @@ public class defend : MonoBehaviour
     {
         movement.x = 0f;
         movement.y = 0f;
+
+        // Handle movement based on player type
         switch (playerType)
         {
             case PlayerType.Player1:
@@ -48,50 +48,60 @@ public class defend : MonoBehaviour
                 break;
 
             case PlayerType.Player2:
-                if (Input.GetKey(KeyCode.PageUp) || Input.GetKey(KeyCode.UpArrow))
+                if (Input.GetKey(KeyCode.PageUp))
                 {
                     movement.y += 1;
                 }
-                if (Input.GetKey(KeyCode.PageDown) || Input.GetKey(KeyCode.DownArrow))
+                if (Input.GetKey(KeyCode.PageDown))
                 {
                     movement.y -= 1;
                 }
-                if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.LeftArrow))
+                if (Input.GetKey(KeyCode.Home))
                 {
                     movement.x -= 1;
                 }
-                if (Input.GetKey(KeyCode.End) || Input.GetKey(KeyCode.RightArrow))
+                if (Input.GetKey(KeyCode.End))
                 {
                     movement.x += 1;
                 }
                 break;
-
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    Debug.Log("damage");
-                    Damage(20f);
-                }
-
-
-
-
-                movement = movement.normalized;
         }
 
-        void Damage(float damage)
+        // Normalize movement vector to ensure consistent speed
+        movement = movement.normalized;
+
+        // Handle damage input
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            currentHealth -= damage;
-            healthBar.SetHealth(currentHealth);
+            Debug.Log("Damage triggered!");
+            Damage(20f);
         }
-        void FixedUpdate()
-        {
+    }
 
-            transform.Translate(movement * moveSpeed * Time.fixedDeltaTime);
-        }
+    void FixedUpdate()
+    {
+        // Move the player
+        transform.Translate(movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public void Damage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 0) currentHealth = 0; // Prevent health from going negative
+        healthBar.SetHealth(currentHealth); // Update the health bar
+    }
 
     public void SetMoveSpeed(float speed)
     {
         moveSpeed = speed;
     }
 }
+
+// Enum for PlayerType (ensure this is defined elsewhere in your project if needed)
+public enum PlayerType
+{
+    Player1,
+    Player2
+}
+
+// Ensure your HealthSystem class is implemented correctly

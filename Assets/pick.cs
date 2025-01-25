@@ -5,7 +5,7 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     // Start is called before the first frame update
-    public defend player;
+    public Defend player;
     private int effect;
 
     //Genarate Wall

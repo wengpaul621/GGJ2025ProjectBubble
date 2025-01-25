@@ -17,13 +17,13 @@ public class Defend : MonoBehaviour
 
     public void Reset()
     {
-        maxHealth = 100;
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth); // Ensure this is implemented in your HealthSystem class
         SetMoveSpeed(moveSpeed);
     }
     void Start()
     {
+        maxHealth = 100;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth); // Ensure this is implemented in your HealthSystem class
         Reset();
     }
 

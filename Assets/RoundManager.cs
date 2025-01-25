@@ -92,6 +92,10 @@ public class RoundManager : MonoBehaviour
         }
     }
 
+    void GameEnd()
+    {
+
+    }
     public void ResetGame()
     {
         if (countdownCoroutine != null)

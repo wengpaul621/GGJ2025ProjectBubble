@@ -28,9 +28,17 @@ public class RoundManager : MonoBehaviour
     public int countdownTime = 10; // Set initial countdown time in seconds
 
     private float timer;
-
+    private AnimatorStateInfo info;
     public LineMove line;
     bool isGaming=false;
+
+    public Animator animatorAnnouncement;
+
+    public GameObject geneGameObjectP1;
+    public GameObject geneGameObjectP2;
+
+    public Vector3 genePositionP1;
+    public Vector3 genePositionP2;
     private void Awake()
     {
         if (instance == null)
@@ -55,12 +63,6 @@ public class RoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Exit early if the game is not active
-        if (!isGaming)
-        {
-            return;
-        }
-
         // Handle game state based on the attack side
         switch (attackSide)
         {
@@ -71,7 +73,8 @@ public class RoundManager : MonoBehaviour
                 }
                 else if (P2Defend.currentHealth <= 0)
                 {
-                    Player1End(); // Player 1 wins if Player 2's health is zero
+                    Debug.Log("P2GG");
+                    GameEnd();
                 }
                 break;
 
@@ -82,7 +85,7 @@ public class RoundManager : MonoBehaviour
                 }
                 else if (P1Defend.currentHealth <= 0)
                 {
-                    Player2End(); // Player 2 wins if Player 1's health is zero
+                    GameEnd();
                 }
                 break;
 
@@ -91,10 +94,23 @@ public class RoundManager : MonoBehaviour
                 break;
         }
     }
-
+    bool isGameEnd = false;
     void GameEnd()
     {
+        if (isGameEnd == true) return;
 
+        isGameEnd = true;
+        if(P1Defend.currentHealth > 0)
+        {
+            animatorAnnouncement.SetTrigger("P1Win");
+            Instantiate(geneGameObjectP2, genePositionP2, Quaternion.identity);
+
+        }
+        else if(P2Defend.currentHealth > 0)
+        {
+            animatorAnnouncement.SetTrigger("P2Win");
+            Instantiate(geneGameObjectP2, genePositionP1, Quaternion.identity);
+        }
     }
     public void ResetGame()
     {
@@ -116,7 +132,20 @@ public class RoundManager : MonoBehaviour
     {
         Debug.Log("P1End");
         ResetGame();
-        Playe2Round();
+        animatorAnnouncement.SetTrigger("P2Turn");
+
+        AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
+        foreach(var end in ends)
+        {
+            end.endAction += Playe2Round;
+        }
+
+        //info = animatorAnnouncement.GetCurrentAnimatorStateInfo(0);
+        //if (info.normalizedTime >= 1) // 判断动画播放结束normalizedTime的值为0~1，0为开始，1为结束。
+        //{
+        //    Playe2Round();
+        //}
+       
     }
 
 
@@ -124,7 +153,14 @@ public class RoundManager : MonoBehaviour
     {
         Debug.Log("P2End");
         ResetGame();
-        Playe1Round();
+        animatorAnnouncement.SetTrigger("P1Turn");
+        info = animatorAnnouncement.GetCurrentAnimatorStateInfo(0);
+        if (info.normalizedTime >= 1) // 判断动画播放结束normalizedTime的值为0~1，0为开始，1为结束。
+        {
+            Playe1Round();
+        }
+
+        
     }
 
     private Coroutine countdownCoroutine;
@@ -164,6 +200,13 @@ public class RoundManager : MonoBehaviour
 
     void Playe2Round()
     {
+        AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
+        foreach (var end in ends)
+        {
+            end.endAction -= Playe2Round;
+        }
+
+        Debug.Log("P2Round");
         attackSide = AttackSide.Player2;
         FieldPlayer1.SetActive(false);
         FieldPlayer2.SetActive(true);

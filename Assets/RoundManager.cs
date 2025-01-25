@@ -22,7 +22,7 @@ public class RoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Playe1Round();
     }
 
     // Update is called once per frame

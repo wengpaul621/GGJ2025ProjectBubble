@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
 {
+    public static RoundManager instance;
     // Enum for player type
     public enum AttackSide
     {
@@ -24,6 +25,18 @@ public class RoundManager : MonoBehaviour
 
     private float timer;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,6 +18,9 @@ public class RoundManager : MonoBehaviour
     public GameObject FieldPlayer1;
     public GameObject FieldPlayer2;
 
+    public Defend P1Defend;
+    public Defend P2Defend;
+
     public Drink Player1Drink;
     public Drink Player2Drink;
 
@@ -27,7 +31,7 @@ public class RoundManager : MonoBehaviour
 
     public float break_time = 3f;
     public LineMove line;
-    bool isGaming=false;
+    bool isGaming = false;
     private void Awake()
     {
         if (instance == null)
@@ -52,23 +56,46 @@ public class RoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (!isGaming) { return; }
-        if (attackSide == AttackSide.Player1 && Player1Drink.capacity <= 0)
+        // Exit early if the game is not active
+        if (!isGaming)
         {
-           Player1End();
+            return;
         }
 
-        if (attackSide == AttackSide.Player2 && Player2Drink.capacity <= 0)
+        // Handle game state based on the attack side
+        switch (attackSide)
         {
-            Player2End();
+            case AttackSide.Player1:
+                if (Player1Drink.capacity <= 0)
+                {
+                    Player1End(); // Player 2 wins if Player 1's drink is empty
+                }
+                else if (P2Defend.currentHealth <= 0)
+                {
+                    Player1End(); // Player 1 wins if Player 2's health is zero
+                }
+                break;
+
+            case AttackSide.Player2:
+                if (Player2Drink.capacity <= 0)
+                {
+                    Player2End(); // Player 1 wins if Player 2's drink is empty
+                }
+                else if (P1Defend.currentHealth <= 0)
+                {
+                    Player2End(); // Player 2 wins if Player 1's health is zero
+                }
+                break;
+
+            default:
+                Debug.LogWarning("Unknown attack side detected!"); // Fallback case for debugging
+                break;
         }
     }
 
-    public void Playe1Round()
+    void GameEnd()
     {
         isGaming = true;
-        
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
         timer = countdownTime; // Reset the timer for the new round
@@ -76,16 +103,32 @@ public class RoundManager : MonoBehaviour
         countdownText.gameObject.SetActive(true);
         StartCoroutine(CountdownRoutine());
     }
+    public void ResetGame()
+    {
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+        }
+
+        P1Defend.Reset();
+        P2Defend.Reset();
+        Player1Drink.Reset();
+        Player2Drink.Reset();
+
+    }
+
+
 
     public void Player1End()
     {
-        Debug.Log("Start");
+        Debug.Log("P1End");
+        ResetGame();
         Playe2Round();
     }
 
     void Playe2Round()
     {
-        
+
         FieldPlayer1.SetActive(false);
         FieldPlayer2.SetActive(true);
         timer = countdownTime; // Reset the timer for the new round
@@ -94,15 +137,19 @@ public class RoundManager : MonoBehaviour
 
     public void Player2End()
     {
+        Debug.Log("P2End");
+        ResetGame();
         Playe1Round();
     }
+
+    private Coroutine countdownCoroutine;
 
     IEnumerator CountdownRoutine()
     {
         while (timer > 0)
         {
             UpdateCountdownDisplay();
-            yield return new WaitForSeconds(0.01f); // Adjusted for finer granularity
+            yield return new WaitForSeconds(0.01f);
             timer -= 0.01f;
         }
 
@@ -111,6 +158,40 @@ public class RoundManager : MonoBehaviour
         UpdateCountdownDisplay();
         CountdownFinished();
     }
+
+    void Playe1Round()
+    {
+        isGaming = true;
+        attackSide = AttackSide.Player1;
+        FieldPlayer1.SetActive(true);
+        FieldPlayer2.SetActive(false);
+        timer = countdownTime;
+        line.gameObject.SetActive(true);
+        countdownText.gameObject.SetActive(true);
+
+        // Stop previous countdown and start a new one
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+        }
+        countdownCoroutine = StartCoroutine(CountdownRoutine());
+    }
+
+    void Playe2Round()
+    {
+        attackSide = AttackSide.Player2;
+        FieldPlayer1.SetActive(false);
+        FieldPlayer2.SetActive(true);
+        timer = countdownTime;
+
+        // Stop previous countdown and start a new one
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+        }
+        countdownCoroutine = StartCoroutine(CountdownRoutine());
+    }
+
 
     void UpdateCountdownDisplay()
     {

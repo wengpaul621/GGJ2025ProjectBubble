@@ -11,13 +11,20 @@ public class Defend : MonoBehaviour
     public HealthSystem healthBar;
     private Vector2 movement;
     public PlayerType playerType;
+    public GameObject hitEffectPrefab;
+    public Animator animator;
+    public float damage = 5;
 
+    public void Reset()
+    {
+        SetMoveSpeed(moveSpeed);
+    }
     void Start()
     {
         maxHealth = 100;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth); // Ensure this is implemented in your HealthSystem class
-        SetMoveSpeed(moveSpeed);
+        Reset();
     }
 
     void Update()
@@ -29,38 +36,38 @@ public class Defend : MonoBehaviour
         switch (playerType)
         {
             case PlayerType.Player1:
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                if (Input.GetKey(KeyCode.W) )
                 {
                     movement.y += 1;
                 }
-                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                if (Input.GetKey(KeyCode.S) )
                 {
                     movement.y -= 1;
                 }
-                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                if (Input.GetKey(KeyCode.A))
                 {
                     movement.x -= 1;
                 }
-                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                if (Input.GetKey(KeyCode.D))
                 {
                     movement.x += 1;
                 }
                 break;
 
             case PlayerType.Player2:
-                if (Input.GetKey(KeyCode.PageUp))
+                if (Input.GetKey(KeyCode.UpArrow))
                 {
                     movement.y += 1;
                 }
-                if (Input.GetKey(KeyCode.PageDown))
+                if (Input.GetKey(KeyCode.DownArrow))
                 {
                     movement.y -= 1;
                 }
-                if (Input.GetKey(KeyCode.Home))
+                if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     movement.x -= 1;
                 }
-                if (Input.GetKey(KeyCode.End))
+                if (Input.GetKey(KeyCode.RightArrow))
                 {
                     movement.x += 1;
                 }
@@ -69,13 +76,6 @@ public class Defend : MonoBehaviour
 
         // Normalize movement vector to ensure consistent speed
         movement = movement.normalized;
-
-        // Handle damage input
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Damage triggered!");
-            Damage(20f);
-        }
     }
 
     void FixedUpdate()
@@ -89,11 +89,26 @@ public class Defend : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0; // Prevent health from going negative
         healthBar.SetHealth(currentHealth); // Update the health bar
+        animator.SetTrigger("Hurt");
+        
+        
     }
 
     public void SetMoveSpeed(float speed)
     {
         moveSpeed = speed;
+    }
+
+    
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Contains("Bubble"))
+        {
+            Damage(damage);
+            Instantiate(hitEffectPrefab, collision.collider.ClosestPoint(collision.transform.position), Quaternion.identity);
+            Destroy(collision.gameObject);
+        }
     }
 }
 
@@ -103,5 +118,3 @@ public enum PlayerType
     Player1,
     Player2
 }
-
-// Ensure your HealthSystem class is implemented correctly

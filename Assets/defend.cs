@@ -6,7 +6,7 @@ using static Drink;
 
 public class defend : MonoBehaviour
 {
-    public float moveSpeed = 3f; // ���ʳt��
+    public float moveSpeed; // ���ʳt��
     public float currentHealth;
     public float maxHealth;
 
@@ -15,7 +15,7 @@ public class defend : MonoBehaviour
     public PlayerType playerType;
     void Start()
     {
-
+        moveSpeed = 3f;
         maxHealth = 100;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -67,17 +67,14 @@ public class defend : MonoBehaviour
                 break;
 
 
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    Debug.Log("damage");
-                    Damage(20f);
-                }
-
-
-
-
-                movement = movement.normalized;
         }
+        movement = movement.normalized;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("damage");
+            Damage(20f);
+        }
+    }
 
         void Damage(float damage)
         {

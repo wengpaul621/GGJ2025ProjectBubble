@@ -5,18 +5,17 @@ using UnityEngine.UI;
 
 public class CapacityBar : MonoBehaviour
 {
-    public Slider slider;
-    //public Gradient gradient;
     public Image fill;
+
+    private float maxCapacity;
+
     public void SetMaxCapacity(float capacity)
     {
-        slider.maxValue = capacity;
-        slider.value = capacity;
-        //fill.color = gradient.Evaluate(1f);
+        maxCapacity = capacity;
     }
     public void SetCapacity(float capacity)
     {
-        slider.value = capacity;
+        fill.fillAmount = capacity / maxCapacity;
         //fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }

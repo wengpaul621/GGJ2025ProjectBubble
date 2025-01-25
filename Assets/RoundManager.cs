@@ -28,6 +28,7 @@ public class RoundManager : MonoBehaviour
     public int countdownTime = 10; // Set initial countdown time in seconds
 
     private float timer;
+
     private AnimatorStateInfo info;
     public LineMove line;
     bool isGaming=false;
@@ -39,6 +40,7 @@ public class RoundManager : MonoBehaviour
 
     public Vector3 genePositionP1;
     public Vector3 genePositionP2;
+
     private void Awake()
     {
         if (instance == null)
@@ -97,6 +99,7 @@ public class RoundManager : MonoBehaviour
     bool isGameEnd = false;
     void GameEnd()
     {
+
         if (isGameEnd == true) return;
 
         isGameEnd = true;
@@ -123,7 +126,7 @@ public class RoundManager : MonoBehaviour
         P2Defend.Reset();
         Player1Drink.Reset();
         Player2Drink.Reset();
-        
+
     }
 
 
@@ -141,13 +144,12 @@ public class RoundManager : MonoBehaviour
         }
 
         //info = animatorAnnouncement.GetCurrentAnimatorStateInfo(0);
-        //if (info.normalizedTime >= 1) // ÅÐ¶Ï¶¯»­²¥·Å½áÊønormalizedTimeµÄÖµÎª0~1£¬0Îª¿ªÊ¼£¬1Îª½áÊø¡£
+        //if (info.normalizedTime >= 1) // ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½normalizedTimeï¿½ï¿½ÖµÎª0~1ï¿½ï¿½0Îªï¿½ï¿½Ê¼ï¿½ï¿½1Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //{
         //    Playe2Round();
         //}
        
     }
-
 
     public void Player2End()
     {
@@ -155,7 +157,7 @@ public class RoundManager : MonoBehaviour
         ResetGame();
         animatorAnnouncement.SetTrigger("P1Turn");
         info = animatorAnnouncement.GetCurrentAnimatorStateInfo(0);
-        if (info.normalizedTime >= 1) // ÅÐ¶Ï¶¯»­²¥·Å½áÊønormalizedTimeµÄÖµÎª0~1£¬0Îª¿ªÊ¼£¬1Îª½áÊø¡£
+        if (info.normalizedTime >= 1) // ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½normalizedTimeï¿½ï¿½ÖµÎª0~1ï¿½ï¿½0Îªï¿½ï¿½Ê¼ï¿½ï¿½1Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             Playe1Round();
         }
@@ -183,7 +185,6 @@ public class RoundManager : MonoBehaviour
     void Playe1Round()
     {
         isGaming = true;
-        attackSide = AttackSide.Player1;
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
         timer = countdownTime;
@@ -220,7 +221,6 @@ public class RoundManager : MonoBehaviour
         countdownCoroutine = StartCoroutine(CountdownRoutine());
     }
 
-
     void UpdateCountdownDisplay()
     {
         countdownText.text = timer.ToString("00.00"); // Display as two digits with two decimals (e.g., 09.99, 08.00)
@@ -231,13 +231,37 @@ public class RoundManager : MonoBehaviour
         Debug.Log("Countdown finished!");
         if (attackSide == AttackSide.Player1)
         {
-            Player1End(); // Switch to Player 2
+            StartCoroutine(StartTimer(break_time, 0));
         }
         else if (attackSide == AttackSide.Player2)
         {
-            Player2End(); // Switch to Player 1
+            StartCoroutine(StartTimer(break_time, 1));
         }
     }
 
-
+    IEnumerator StartTimer(float duration, int player)
+    {
+        Debug.Log("Timer started...");
+        isGaming = false;
+        if (player == 0)
+        {
+            attackSide = AttackSide.Player2;
+        }
+        else
+        {
+            attackSide = AttackSide.Player1;
+        }
+        yield return new WaitForSeconds(duration);
+        Debug.Log("3 seconds passed!");
+        isGaming = true;
+        if (player == 0)
+        {
+            Player1End();
+        }
+        else
+        {
+            Player2End();
+        }
+        // Add actions to execute after the timer ends
+    }
 }

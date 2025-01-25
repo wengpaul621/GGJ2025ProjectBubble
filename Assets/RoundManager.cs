@@ -231,11 +231,11 @@ public class RoundManager : MonoBehaviour
         Debug.Log("Countdown finished!");
         if (attackSide == AttackSide.Player1)
         {
-            StartCoroutine(StartTimer(break_time, 0));
+            //StartCoroutine(StartTimer(break_time, 0));
         }
         else if (attackSide == AttackSide.Player2)
         {
-            StartCoroutine(StartTimer(break_time, 1));
+            //StartCoroutine(StartTimer(break_time, 1));
         }
     }
 

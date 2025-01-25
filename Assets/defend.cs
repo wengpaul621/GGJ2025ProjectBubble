@@ -6,13 +6,20 @@ using static Drink;
 
 public class defend : MonoBehaviour
 {
-    public float moveSpeed = 3f; // 移動速度
+    public float moveSpeed = 3f; // 嚙踝蕭嚙褊速嚙踝蕭
+    public float currentHealth;
+    public float maxHealth;
 
+    public HealthSystem healthBar;
     private Vector2 movement;
     public PlayerType playerType;
     void Start()
     {
-        SetMoveSpeed( moveSpeed);
+
+        maxHealth = 100;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        SetMoveSpeed(moveSpeed);
     }
 
     void Update()
@@ -58,21 +65,30 @@ public class defend : MonoBehaviour
                     movement.x += 1;
                 }
                 break;
+
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Debug.Log("damage");
+                    Damage(20f);
+                }
+
+
+
+
+                movement = movement.normalized;
         }
-        // 取得玩家輸入
-        
 
+        void Damage(float damage)
+        {
+            currentHealth -= damage;
+            healthBar.SetHealth(currentHealth);
+        }
+        void FixedUpdate()
+        {
 
-
-       
-        movement = movement.normalized;
-    }
-
-    void FixedUpdate()
-    {
-        
-        transform.Translate(movement * moveSpeed * Time.fixedDeltaTime);
-    }
+            transform.Translate(movement * moveSpeed * Time.fixedDeltaTime);
+        }
 
     public void SetMoveSpeed(float speed)
     {

@@ -23,8 +23,8 @@ public class Generater : MonoBehaviour
     void Timer()
     {
         
-        float rand = Random.Range(0f, 500f);
-        if (rand <= 8)
+        float rand = Random.Range(0f, 1000f);
+        if (rand <= 15)
         {
             Debug.Log("Start Gene");
             GameObject itemToSpawn = itemPrefabs[0];

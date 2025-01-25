@@ -5,12 +5,18 @@ using UnityEngine;
 public class defend : MonoBehaviour
 {
     public float moveSpeed = 3f; // 移動速度
+    public float currentHealth;
+    public float maxHealth;
 
+    public HealthSystem healthBar;
     private Vector2 movement;
 
     void Start()
     {
+        maxHealth = 100;
         SetMoveSpeed(3f);
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
@@ -19,7 +25,6 @@ public class defend : MonoBehaviour
         movement.x = 0f; // 初始化
         movement.y = 0f;
 
-        // 使用 W、A、S、D 控制方向
         if (Input.GetKey(KeyCode.PageUp) || Input.GetKey(KeyCode.UpArrow))
         {
             movement.y += 1;
@@ -37,10 +42,21 @@ public class defend : MonoBehaviour
             movement.x += 1;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))    
+        {
+            Debug.Log("damage");
+            Damage(20f);
+        }
+
         // 規範移動量 (避免斜向移動過快)
         movement = movement.normalized;
     }
 
+    void Damage(float damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);   
+    }
     void FixedUpdate()
     {
         // 更新物體位置

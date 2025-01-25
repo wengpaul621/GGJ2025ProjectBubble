@@ -32,6 +32,11 @@ public class Drink : MonoBehaviour
 
     public float maxCapacity = 5000;
     public float capacity = 0f;
+
+    public float intensity;
+    public float frequency;
+
+
     private void Start()
     {
         shakeBar.SetMaxShakePressure(maxPressure);
@@ -45,10 +50,12 @@ public class Drink : MonoBehaviour
     void Update()
     {
         Move();
+        Rotate();
 
         // Start monitoring mouse speed when left mouse button is pressed
         if (Input.GetMouseButtonDown(0)) // Left mouse button pressed
         {
+            
             StartMonitoringMouseSpeed();
         }
 
@@ -56,18 +63,20 @@ public class Drink : MonoBehaviour
         if (isMonitoring)
         {
             MonitorMouseSpeed();
+            //CameraShake.Instance.shakeCameraWithFrequency(intensity, frequency);
             
         }
         else
         {
             // Gradually decrease the speed when not monitoring (smoothly decrease to 0)
-            pressure = Mathf.Lerp(pressure, 0f, Time.deltaTime * 2f);
+            pressure = Mathf.Lerp(pressure, 0f, Time.deltaTime * 3f);
             shakeBar.SetShakePressure(pressure);
         }
-        
+        UpdateCapacity();
+
+
     }
 
-    // Move logic (Player movement controls can be added here)
     void Move()
     {
         float moveDirection = 0f;
@@ -97,7 +106,41 @@ public class Drink : MonoBehaviour
                 break;
         }
 
-        transform.Translate(Vector3.up * moveDirection * moveSpeed * Time.deltaTime);
+        // 使用全局坐标系移动
+        transform.Translate(Vector3.up * moveDirection * moveSpeed * Time.deltaTime, Space.World);
+    }
+
+
+    void Rotate()
+    {
+        float rotationSpeed = 100f; // Rotation speed in degrees per second
+
+
+        switch (playerType)
+        {
+            case PlayerType.Player1:
+                if (Input.GetKey(KeyCode.A))
+                {
+                    transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+                }
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
+                }
+                break;
+
+            case PlayerType.Player2:
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+                }
+                else if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
+                }
+                break;
+        }
+
     }
 
     // Function to start mouse speed monitoring
@@ -150,6 +193,11 @@ public class Drink : MonoBehaviour
                 pressure -= deltaPressure;
             }
             
+            if(pressure>=maxPressure)
+            {
+                pressure = maxPressure;
+            }
+
             shakeBar.SetShakePressure(pressure);
             deltaPressure = 0;
             totalDistance = 0f;
@@ -162,14 +210,26 @@ public class Drink : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isMonitoring = false;
-            Shoot(pressure);
+            //Shoot(pressure);
         }
     }
 
-    void Shoot(float pressure)
+    // Function to update capacity
+    private void UpdateCapacity()
     {
+        // Reduce capacity based on pressure
+        if (pressure > 0)
+        {
+            float reductionRate = pressure / maxPressure; // Proportional reduction
+            capacity -= reductionRate * Time.deltaTime * 1000; // Scale by a factor of 100
 
+            // Ensure capacity doesn't go below 0
+            if (capacity < 0)
+            {
+                capacity = 0;
+            }
+
+            capacityBar.SetCapacity(capacity);
+        }
     }
-
-   
 }

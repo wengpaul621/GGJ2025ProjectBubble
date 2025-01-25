@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using static Drink;
+using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
 {
@@ -18,31 +19,40 @@ public class RoundManager : MonoBehaviour
     public Drink Player1Drink;
     public Drink Player2Drink;
 
-    
+    public TextMeshProUGUI countdownText;
+    public int countdownTime = 10; // Set initial countdown time in seconds
+
+    private float timer;
+
     // Start is called before the first frame update
     void Start()
     {
         Playe1Round();
+        //timer = countdownTime;
+        //StartCoroutine(CountdownRoutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (attackSide == AttackSide.Player1 &&Player1Drink.capacity <= 0)
+        if (attackSide == AttackSide.Player1 && Player1Drink.capacity <= 0)
         {
-            Debug.Log("Player1Lose");
+           Player1End();
         }
 
         if (attackSide == AttackSide.Player2 && Player2Drink.capacity <= 0)
         {
-            Debug.Log("Player2Lose");
+            Player2End();
         }
     }
 
     void Playe1Round()
     {
+        attackSide = AttackSide.Player1;
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
+        timer = countdownTime; // Reset the timer for the new round
+        StartCoroutine(CountdownRoutine());
     }
 
     public void Player1End()
@@ -52,12 +62,48 @@ public class RoundManager : MonoBehaviour
 
     void Playe2Round()
     {
+        attackSide = AttackSide.Player2;
         FieldPlayer1.SetActive(false);
         FieldPlayer2.SetActive(true);
+        timer = countdownTime; // Reset the timer for the new round
+        StartCoroutine(CountdownRoutine());
     }
 
     public void Player2End()
     {
         Playe1Round();
+    }
+
+    IEnumerator CountdownRoutine()
+    {
+        while (timer > 0)
+        {
+            UpdateCountdownDisplay();
+            yield return new WaitForSeconds(0.01f); // Adjusted for finer granularity
+            timer -= 0.01f;
+        }
+
+        // When the countdown reaches 0, update the display and trigger an event
+        timer = 0; // Ensure timer doesn't go negative
+        UpdateCountdownDisplay();
+        CountdownFinished();
+    }
+
+    void UpdateCountdownDisplay()
+    {
+        countdownText.text = timer.ToString("00.00"); // Display as two digits with two decimals (e.g., 09.99, 08.00)
+    }
+
+    void CountdownFinished()
+    {
+        Debug.Log("Countdown finished!");
+        if (attackSide == AttackSide.Player1)
+        {
+            Player1End(); // Switch to Player 2
+        }
+        else if (attackSide == AttackSide.Player2)
+        {
+            Player2End(); // Switch to Player 1
+        }
     }
 }

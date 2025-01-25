@@ -318,8 +318,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 7
-      minScalar: 10
+      scalar: 3.5
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -371,8 +371,8 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: 10
+      scalar: 2.5
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4987,6 +4987,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1263561377729180236}
   - component: {fileID: 2908964311612442142}
+  - component: {fileID: 8328672952197560221}
+  - component: {fileID: 7246587805839728358}
+  - component: {fileID: 8652421011870801105}
   m_Layer: 0
   m_Name: ColaLauncher
   m_TagString: Untagged
@@ -5002,7 +5005,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2754580123339952461}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.68453157, w: 0.7289833}
+  m_LocalRotation: {x: 0, y: 0, z: -0.6845344, w: 0.72898066}
   m_LocalPosition: {x: -6.31, y: -0.28, z: -0.03949783}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5030,10 +5033,108 @@ MonoBehaviour:
   - objPrefab: {fileID: 4804072477265691151, guid: 6a6c4abe1c6f50241a7b893ed1118c08, type: 3}
     objCount: {x: 2, y: 4}
   launchInterval: 0.1
-  launchDiffusAngle: 20
+  launchDiffusAngle: 5
   launchPressure: 1000
   launchPressurePercRange: {x: 0.4861089, y: 1}
   launchIntervalTimer: 0
+--- !u!114 &8328672952197560221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754580123339952461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32fbfb09d1c66fa49a2cf540f97dfd52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 0
+  moveSpeed: 5
+  updateInterval: 0.05
+  averageShakeSpeed: 0
+  pressure: 0
+  maxPressure: 30000
+  speedRangeLow: 1000
+  speedRangeHeight: 2000
+  shakeBar: {fileID: 0}
+  capacityBar: {fileID: 0}
+  maxCapacity: 7500
+  capacity: 0
+  intensity: 1
+  frequency: 1
+--- !u!61 &7246587805839728358
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754580123339952461}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.37716365, y: 0.3519833}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.0615392, y: 0.973927}
+  m_EdgeRadius: 0
+--- !u!50 &8652421011870801105
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754580123339952461}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &4546511417825051115
 GameObject:
   m_ObjectHideFlags: 0
@@ -5060,8 +5161,8 @@ Transform:
   m_GameObject: {fileID: 4546511417825051115}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08030985, y: 0, z: 0}
-  m_LocalScale: {x: 0.059358668, y: 0.067838475, z: 0.067838475}
+  m_LocalPosition: {x: -0.0904, y: -0.00038, z: 0}
+  m_LocalScale: {x: 0.059358668, y: 0.07013472, z: 0.067838475}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7007557147758843892}
@@ -5143,14 +5244,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5493791807871647735}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.93, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.82, y: 0.35, z: 0}
   m_LocalScale: {x: 12.07822, y: 5.4901, z: 5.4901}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5157894110466570965}
   m_Father: {fileID: 1263561377729180236}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &396620359672565533
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10124,15 +10225,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5814656545343157786}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.79, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.86, y: 0.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2848379190530993006}
   - {fileID: 7949658082089709783}
   m_Father: {fileID: 1263561377729180236}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &6131089984742466889
 GameObject:
   m_ObjectHideFlags: 0
@@ -15364,8 +15465,8 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 5
+      scalar: 2.5
+      minScalar: 2.5
       maxCurve:
         serializedVersion: 2
         m_Curve:

@@ -24,4 +24,13 @@ public class ColaBubble : MonoBehaviour
             .OnComplete(() => Destroy(gameObject));
         DOVirtual.DelayedCall(disableColliderTime, () => { coll.enabled = false; });
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag=="Player")
+        {
+            Destroy(gameObject);
+        }
+        
+    }
 }

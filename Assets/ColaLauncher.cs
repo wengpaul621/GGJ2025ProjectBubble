@@ -19,14 +19,22 @@ public class ColaLauncher : MonoBehaviour
     [Title("Debug")]
     [ReadOnly] [SerializeField] private float launchIntervalTimer;
 
-    public void Update()
+    Drink drink;
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+
+       drink = GetComponent<Drink>();
+    }
+    void Update()
+    {
+        launchObjInfos[0].objCount = new Vector2Int((int)(drink.pressure * 0.0005), (int)(drink.pressure * 0.002));
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Launch();
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             if (launchIntervalTimer < launchInterval)
             {
@@ -39,11 +47,12 @@ public class ColaLauncher : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             launchIntervalTimer = 0.0f;
         }
     }
+
 
     [Button]
     public void Launch()

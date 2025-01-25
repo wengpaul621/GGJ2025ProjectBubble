@@ -283,7 +283,7 @@ Transform:
   m_GameObject: {fileID: 56544494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 5.89, z: 0}
+  m_LocalPosition: {x: 0.05, y: 5.48, z: 0}
   m_LocalScale: {x: 529.7801, y: 37.02564, z: 11.801}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -331,7 +331,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 068bf7097f990a242b175306745d5931, type: 3}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  m_Color: {r: 1, g: 0.43529415, b: 0.5254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5751,7 +5751,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1000
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  m_Color: {r: 0.2832538, g: 0.29751262, b: 0.5622641, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6292,7 +6292,7 @@ GameObject:
   - component: {fileID: 435868379}
   - component: {fileID: 435868378}
   m_Layer: 0
-  m_Name: Player2Defend (1)
+  m_Name: P1Defend (1)
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6474,7 +6474,7 @@ MonoBehaviour:
   currentHealth: 20
   maxHealth: 20
   healthBar: {fileID: 1039683222}
-  playerType: 1
+  playerType: 0
   hitEffectPrefab: {fileID: 7802641215399291206, guid: 4778403971ddbd04384c67884c69bdd1, type: 3}
   animator: {fileID: 435868378}
   damage: 5
@@ -6553,7 +6553,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 068bf7097f990a242b175306745d5931, type: 3}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  m_Color: {r: 1, g: 0.43529415, b: 0.5254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7188,7 +7188,7 @@ RectTransform:
   m_Father: {fileID: 1731532519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8662,7 +8662,7 @@ RectTransform:
   m_Father: {fileID: 1449027516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8819,6 +8819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1039683223}
+  smoothTime: 0.2
 --- !u!114 &1039683223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9295,7 +9296,7 @@ RectTransform:
   m_Father: {fileID: 1059625557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19849,7 +19850,7 @@ GameObject:
   - component: {fileID: 1313730395}
   - component: {fileID: 1313730396}
   m_Layer: 0
-  m_Name: Player2Defend
+  m_Name: P2Defend
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25637,7 +25638,7 @@ RectTransform:
   m_Father: {fileID: 824516646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -25781,7 +25782,7 @@ RectTransform:
   m_Father: {fileID: 1039683224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -26370,7 +26371,7 @@ Transform:
   m_GameObject: {fileID: 1627095529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -9.97, y: 0, z: 0}
+  m_LocalPosition: {x: -9.46, y: 0, z: 0}
   m_LocalScale: {x: 529.7801, y: 37.02564, z: 11.801}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26418,7 +26419,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 068bf7097f990a242b175306745d5931, type: 3}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  m_Color: {r: 1, g: 0.43529415, b: 0.5254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -37387,7 +37388,7 @@ Transform:
   m_GameObject: {fileID: 1901488332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 9.97, y: 0, z: 0}
+  m_LocalPosition: {x: 9.46, y: -0.04, z: 0}
   m_LocalScale: {x: 529.7801, y: 37.02564, z: 11.801}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37435,7 +37436,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 068bf7097f990a242b175306745d5931, type: 3}
-  m_Color: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  m_Color: {r: 1, g: 0.43529415, b: 0.5254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -37859,7 +37860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2017153157
 Transform:
   m_ObjectHideFlags: 0
@@ -43077,7 +43078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2123052898
 Transform:
   m_ObjectHideFlags: 0

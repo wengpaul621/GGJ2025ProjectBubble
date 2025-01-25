@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Slider healthBar;
+    public Image healthBar;
+    private float maxHealth;
     void Start()
     {
         
@@ -15,8 +16,8 @@ public class HealthSystem : MonoBehaviour
 
     public void SetMaxHealth(float health)
     {
-        healthBar.maxValue = health;
-        healthBar.value = health;
+        maxHealth = health;
+        healthBar.fillAmount = 1.0f;
     }
 
     // Update is called once per frame
@@ -30,17 +31,17 @@ public class HealthSystem : MonoBehaviour
 
     private IEnumerator SmoothHealthChange(float targetHealth)
     {
-        float currentHealth = healthBar.value;
+        float currentHealth = healthBar.fillAmount;
         float elapsedTime = 0f;
 
         while (elapsedTime < smoothTime)
         {
             elapsedTime += Time.deltaTime;
-            healthBar.value = Mathf.Lerp(currentHealth, targetHealth, elapsedTime / smoothTime);
+            healthBar.fillAmount = Mathf.Lerp(currentHealth, (targetHealth / maxHealth), elapsedTime / smoothTime);
             yield return null; // Wait for the next frame
         }
 
         // Ensure the final value is set precisely
-        healthBar.value = targetHealth;
+        healthBar.fillAmount = targetHealth;
     }
 }

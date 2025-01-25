@@ -25,6 +25,8 @@ public class RoundManager : MonoBehaviour
 
     private float timer;
 
+    public LineMove line;
+    bool isGaming=false;
     private void Awake()
     {
         if (instance == null)
@@ -40,7 +42,8 @@ public class RoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Playe1Round();
+
+        //Playe1Round();
         //timer = countdownTime;
         //StartCoroutine(CountdownRoutine());
     }
@@ -48,6 +51,8 @@ public class RoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (!isGaming) { return; }
         if (attackSide == AttackSide.Player1 && Player1Drink.capacity <= 0)
         {
            Player1End();
@@ -59,17 +64,21 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    void Playe1Round()
+    public void Playe1Round()
     {
+        isGaming = true;
         attackSide = AttackSide.Player1;
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
         timer = countdownTime; // Reset the timer for the new round
+        line.gameObject.SetActive(true);
+        countdownText.gameObject.SetActive(true);
         StartCoroutine(CountdownRoutine());
     }
 
     public void Player1End()
     {
+        Debug.Log("Start");
         Playe2Round();
     }
 

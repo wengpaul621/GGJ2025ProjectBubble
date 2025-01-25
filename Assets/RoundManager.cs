@@ -162,7 +162,6 @@ public class RoundManager : MonoBehaviour
     void Playe1Round()
     {
         isGaming = true;
-        attackSide = AttackSide.Player1;
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
         timer = countdownTime;
@@ -176,22 +175,6 @@ public class RoundManager : MonoBehaviour
         }
         countdownCoroutine = StartCoroutine(CountdownRoutine());
     }
-
-    void Playe2Round()
-    {
-        attackSide = AttackSide.Player2;
-        FieldPlayer1.SetActive(false);
-        FieldPlayer2.SetActive(true);
-        timer = countdownTime;
-
-        // Stop previous countdown and start a new one
-        if (countdownCoroutine != null)
-        {
-            StopCoroutine(countdownCoroutine);
-        }
-        countdownCoroutine = StartCoroutine(CountdownRoutine());
-    }
-
 
     void UpdateCountdownDisplay()
     {

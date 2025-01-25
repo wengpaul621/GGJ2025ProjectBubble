@@ -21,10 +21,13 @@ public class Circle : MonoBehaviour
     //Speed up period
     private float speedUpDuration = 2f;
 
+    public Animator animator;
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Circle"))
         {
+            animator.SetTrigger("Break");
             Debug.Log("take");
             Destroy(collision.gameObject);
             effect = Random.Range(0, 2);

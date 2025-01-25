@@ -37,15 +37,19 @@ public class Drink : MonoBehaviour
     public float frequency;
 
 
-    private void Start()
+    public void Reset()
     {
         shakeBar.SetMaxShakePressure(maxPressure);
 
         capacity = maxCapacity;
         capacityBar.SetMaxCapacity(maxCapacity);
-
+        pressure = 0f;
     }
 
+    private void Start()
+    {
+        Reset();
+    }
     // Update is called once per frame
     void Update()
     {

@@ -19,6 +19,7 @@ public class ColaBubble : MonoBehaviour
     Tween scaleTransisTween;
     Tween disableColliderTween;
 
+    public float damage=5;
     private void Awake()
     {
         float lifetime = Random.Range(lifetimeRange.x, lifetimeRange.y);
@@ -32,14 +33,5 @@ public class ColaBubble : MonoBehaviour
     {
         if (scaleTransisTween != null) scaleTransisTween.Kill(false);
         if (disableColliderTween != null) disableColliderTween.Kill(false);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag=="Player")
-        {
-            Destroy(gameObject);
-        }
-        
     }
 }

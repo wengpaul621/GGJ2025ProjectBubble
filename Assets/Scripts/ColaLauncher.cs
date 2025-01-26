@@ -21,6 +21,10 @@ public class ColaLauncher : MonoBehaviour
 
     Drink drink;
 
+    public float ObjectPercMax = 0.0005f;
+    public float ObjectPercMin = 0.001f;
+
+
     private void Start()
     {
 
@@ -28,11 +32,10 @@ public class ColaLauncher : MonoBehaviour
     }
     void Update()
     {
-        launchObjInfos[0].objCount = new Vector2Int((int)(drink.pressure * 0.0005), (int)(drink.pressure * 0.001));
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Launch();
-        }
+        launchObjInfos[0].objCount = new Vector2Int(
+            (int)(drink.pressure * ObjectPercMin),
+            (int)(drink.pressure * ObjectPercMax)
+        );
 
         if (Input.GetKey(KeyCode.Mouse0))
         {

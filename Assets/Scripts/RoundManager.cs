@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
@@ -90,35 +91,46 @@ public class RoundManager : MonoBehaviour
                     GameEnd();
                 }
                 break;
-
-            default:
-                Debug.LogWarning("Unknown attack side detected!"); // Fallback case for debugging
-                break;
         }
     }
     bool isGameEnd = false;
     void GameEnd()
     {
-
         if (isGameEnd == true) return;
-        // 停止倒计时协程
+
+        // Stop the countdown coroutine
         if (countdownCoroutine != null)
         {
             StopCoroutine(countdownCoroutine);
-            countdownCoroutine = null; // 确保协程引用被清空
+            countdownCoroutine = null; // Ensure the coroutine reference is cleared
         }
+
         isGameEnd = true;
-        if(P1Defend.currentHealth > 0)
+
+        // Determine the winner and display the result
+        if (P1Defend.currentHealth > 0)
         {
             animatorAnnouncement.SetTrigger("P1Win");
-            //Instantiate(geneGameObjectP2, genePositionP2, Quaternion.identity);
-
+            genePositionP2 = P2Defend.transform.position;
+            P2Defend.gameObject.SetActive(false);
+            Instantiate(geneGameObjectP2, genePositionP2, Quaternion.identity);
+            StartCoroutine(LoadSceneWithDelay(4f)); // Load scene after a 2-second delay
         }
-        else if(P2Defend.currentHealth > 0)
+        else if (P2Defend.currentHealth > 0)
         {
             animatorAnnouncement.SetTrigger("P2Win");
-            //Instantiate(geneGameObjectP2, genePositionP1, Quaternion.identity);
+            genePositionP1 = P1Defend.transform.position;
+            P1Defend.gameObject.SetActive(false);
+            Instantiate(geneGameObjectP1, genePositionP1, Quaternion.identity); // Ensure you are instantiating the correct object for P1
+            StartCoroutine(LoadSceneWithDelay(4f)); // Load scene after a 2-second delay
         }
+    }
+
+    // Coroutine to load the scene with a delay
+    private IEnumerator LoadSceneWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(0); // Load the scene after the specified delay
     }
     public void ResetGame()
     {
@@ -244,31 +256,5 @@ public class RoundManager : MonoBehaviour
             Player2End();
             //StartCoroutine(StartTimer(break_time, 1));
         }
-    }
-
-    IEnumerator StartTimer(float duration, int player)
-    {
-        Debug.Log("Timer started...");
-        isGaming = false;
-        if (player == 0)
-        {
-            attackSide = AttackSide.Player2;
-        }
-        else
-        {
-            attackSide = AttackSide.Player1;
-        }
-        yield return new WaitForSeconds(duration);
-        Debug.Log("3 seconds passed!");
-        isGaming = true;
-        if (player == 0)
-        {
-            Player1End();
-        }
-        else
-        {
-            Player2End();
-        }
-        // Add actions to execute after the timer ends
     }
 }

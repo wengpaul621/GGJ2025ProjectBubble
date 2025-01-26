@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6020613257206699460}
   - component: {fileID: 7275729816737539998}
+  - component: {fileID: 2121703818356850191}
   m_Layer: 0
   m_Name: P1
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: cf536c8806174eb469a62828a5c5af19, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2121703818356850191
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200246132864299336}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6b1a01e3c30fc4459d9cf6dc499dce9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1528626841466900366
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +212,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1001 &8644419882115687194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203,6 +225,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e43c867c88c209b4caae1b48cf4e94a2, type: 3}
+    - target: {fileID: 396620359672565533, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1263561377729180236, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.06
@@ -246,6 +272,14 @@ PrefabInstance:
     - target: {fileID: 2754580123339952461, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
       propertyPath: m_Name
       value: Cola
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908964311612442142, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
+      propertyPath: ObjectPercMax
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908964311612442142, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
+      propertyPath: ObjectPercMin
+      value: 0.0005
       objectReference: {fileID: 0}
     - target: {fileID: 5272141239976166795, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -316,8 +350,16 @@ PrefabInstance:
       value: 0.28189778
       objectReference: {fileID: 0}
     - target: {fileID: 8328672952197560221, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2121703818356850191}
+    - target: {fileID: 8328672952197560221, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
       propertyPath: capacity
-      value: 7500
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328672952197560221, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
+      propertyPath: maxCapacity
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7246587805839728358, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}

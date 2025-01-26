@@ -17,6 +17,10 @@ PrefabInstance:
       value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 2857540573667279123, guid: b48b8dcbdc7cb3341be427c2814e0882, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857540573667279123, guid: b48b8dcbdc7cb3341be427c2814e0882, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -58,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3029064599843269586, guid: b48b8dcbdc7cb3341be427c2814e0882, type: 3}
       propertyPath: m_Name
-      value: VisualEffect_P2Dead Variant
+      value: VisualEffect_P2Dead
       objectReference: {fileID: 0}
     - target: {fileID: 7632966915445311715, guid: b48b8dcbdc7cb3341be427c2814e0882, type: 3}
       propertyPath: VelocityModule.x.scalar

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class pickupcloud : MonoBehaviour
 {
-    float wallDuration = 3f;
+    float wallDuration = 5f;
     public GameObject wallPrefab; // Prefab for the wall
     public GameObject player1Corner1;
     public GameObject player1Corner2;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7148537966967799313}
   - component: {fileID: 6464311518845872899}
   - component: {fileID: 8079272285174013426}
+  - component: {fileID: -8954290699076306222}
   m_Layer: 0
   m_Name: cloud
   m_TagString: Cloud
@@ -158,3 +159,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8954290699076306222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8992811247717020229}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f6ddd781655df47bbf410b1ce46090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 0}
+  player1Corner1: {fileID: 0}
+  player1Corner2: {fileID: 0}
+  player2Corner1: {fileID: 0}
+  player2Corner2: {fileID: 0}
+  player: {fileID: 0}
+  attackSide: 0

@@ -6,21 +6,41 @@ public class pickupcloud : MonoBehaviour
 {
     float wallDuration = 5f;
     public GameObject wallPrefab; // Prefab for the wall
-    public GameObject player1Corner1;
-    public GameObject player1Corner2;
-    public GameObject player2Corner1;
-    public GameObject player2Corner2;
+
+    public Vector2 Player_1_minXY;
+    public Vector2 Player_1_maxXY;
+    public Vector2 Player_2_minXY;
+    public Vector2 Player_2_maxXY;
+    public Defend player;
     // Start is called before the first frame update
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Cloud"))
+        if (collision.CompareTag("Player"))
         {
+            Debug.Log("take");
 
-            Debug.Log("take cloud");
-            Destroy(collision.gameObject);
+            // Get the Defend component from the player
+            player = collision.gameObject.GetComponent<Defend>();
+
+            // Start the ApplyBuff coroutine
             GenerateWall();
+
+            // Disable the SpriteRenderer and Collider2D components
+            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            Collider2D collider = gameObject.GetComponent<Collider2D>();
+
+            if (spriteRenderer != null)
+                spriteRenderer.enabled = false;
+
+            if (collider != null)
+                collider.enabled = false;
+            Destroy(gameObject);
+            // Optionally, you can also destroy the game object or disable it entirely if needed
+            // Destroy(gameObject); // Or gameObject.SetActive(false);
         }
     }
+
 
     public enum AttackSide
     {
@@ -32,14 +52,14 @@ public class pickupcloud : MonoBehaviour
     {
         if (attackSide == AttackSide.Player1)
         {
-            return new Vector3(Random.Range(player2Corner1.transform.position.x, player2Corner2.transform.position.x),
-                               Random.Range(player2Corner1.transform.position.y, player2Corner2.transform.position.y),
+            return new Vector3(Random.Range(Player_2_minXY.x, Player_2_maxXY.x),
+                               Random.Range(Player_2_minXY.y, Player_2_maxXY.y),
                                0f);
         }
         else
         {
-            return new Vector3(Random.Range(player1Corner1.transform.position.x, player1Corner2.transform.position.x),
-                               Random.Range(player1Corner1.transform.position.y, player1Corner2.transform.position.y),
+            return new Vector3(Random.Range(Player_1_minXY.x, Player_1_maxXY.x),
+                               Random.Range(Player_1_minXY.y, Player_1_maxXY.y),
                                0f); 
         }
     }

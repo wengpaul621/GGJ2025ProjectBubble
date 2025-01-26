@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1949108202368305107}
   - component: {fileID: 8711503043620593578}
   - component: {fileID: 616135635167349025}
+  - component: {fileID: 8458820346271442420}
   m_Layer: 0
   m_Name: ItemBubble_ObstacleCloud
   m_TagString: Cloud
@@ -120,3 +121,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.2799999
+--- !u!114 &8458820346271442420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762536947534493621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f6ddd781655df47bbf410b1ce46090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 8992811247717020229, guid: 4b73f9fe11b3a384eb5af52148faeacf, type: 3}
+  Player_1_minXY: {x: 0, y: -5}
+  Player_1_maxXY: {x: -3, y: 5}
+  Player_2_minXY: {x: 0, y: -5}
+  Player_2_maxXY: {x: 5, y: 4.5}
+  player: {fileID: 0}
+  attackSide: 0

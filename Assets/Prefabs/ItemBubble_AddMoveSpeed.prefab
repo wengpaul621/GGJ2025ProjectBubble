@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1671483692814569771}
   - component: {fileID: 4018096815887169012}
   - component: {fileID: -7492706623548668427}
+  - component: {fileID: -1499452999288671373}
+  - component: {fileID: 5549838455990812417}
   m_Layer: 0
   m_Name: ItemBubble_AddMoveSpeed
   m_TagString: speedUp
@@ -135,12 +137,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   round: {fileID: 0}
   player: {fileID: 0}
+  animator: {fileID: 0}
+--- !u!114 &-1499452999288671373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70078544990218154}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f6ddd781655df47bbf410b1ce46090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   wallPrefab: {fileID: 0}
-  minWidth: 1
-  maxWidth: 5
-  minHeight: 1
-  maxHeight: 5
-  minPosition: {x: -5, y: -5}
-  maxPosition: {x: 5, y: 5}
-  wallDuration: 2
+  player1Corner1: {fileID: 0}
+  player1Corner2: {fileID: 0}
+  player2Corner1: {fileID: 0}
+  player2Corner2: {fileID: 0}
+  player: {fileID: 0}
+  attackSide: 0
+--- !u!114 &5549838455990812417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70078544990218154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad09f3b7654552458ffac9db836fab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  round: {fileID: 0}
+  player: {fileID: 0}
   animator: {fileID: 0}

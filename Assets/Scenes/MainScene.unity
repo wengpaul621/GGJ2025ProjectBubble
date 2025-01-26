@@ -40147,15 +40147,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefabs:
-  - {fileID: 1038385955041793795, guid: cf328d691da632b44a3f4ddff0270a1c, type: 3}
-  - {fileID: 1038385955041793795, guid: cf328d691da632b44a3f4ddff0270a1c, type: 3}
-  - {fileID: 1038385955041793795, guid: cf328d691da632b44a3f4ddff0270a1c, type: 3}
+  - {fileID: 70078544990218154, guid: 7b5f5ceb7859e7944ba8633ffc36ece9, type: 3}
+  - {fileID: 1762536947534493621, guid: cc6298af84f3e3b4b84a642472a2e45c, type: 3}
   player1Corner1: {fileID: 1494717750}
   player1Corner2: {fileID: 934552815}
   player2Corner1: {fileID: 232930063}
   player2Corner2: {fileID: 1201515520}
   attackSide: 0
-  itemsToGenerate: 3
+  itemsToGenerate: 2
 --- !u!4 &1673504098
 Transform:
   m_ObjectHideFlags: 0
@@ -45760,6 +45759,7 @@ MonoBehaviour:
   middlePosition: {x: 5, y: 0, z: 0}
   moveDuration: 1
   stayDuration: 0
+  originalPosition: {x: -2.16, y: 0.66, z: 0.02330351}
 --- !u!212 &1893008526
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -52026,6 +52026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P1Atk
       objectReference: {fileID: 0}
+    - target: {fileID: 5085754059830732862, guid: 63d9039e952b66c4f83d95b53cd40b17, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52042,6 +52046,10 @@ PrefabInstance:
     - target: {fileID: 2228896200544923493, guid: a566ef402b7a89d49be742cd3c224af2, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329332500249171391, guid: a566ef402b7a89d49be742cd3c224af2, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6559555955946147685, guid: a566ef402b7a89d49be742cd3c224af2, type: 3}
       propertyPath: m_Name

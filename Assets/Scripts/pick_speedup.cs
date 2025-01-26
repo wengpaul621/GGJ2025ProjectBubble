@@ -64,7 +64,7 @@ public class Circle : MonoBehaviour
 
     public void Update()
     {
-        if (round.attackSide == 0)//player1's trun
+        if (round.attackSide == RoundManager.AttackSide.Player1)//player1's trun
         {
             player = round.P2Defend;
         }

@@ -4929,7 +4929,7 @@ GameObject:
   - component: {fileID: 2453823105318176110}
   m_Layer: 6
   m_Name: Bubble
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5027,7 +5027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coll: {fileID: 6769099134469500167}
-  lifetimeRange: {x: 3, y: 6}
+  lifetimeRange: {x: 2, y: 4}
   scaleTransisCurve:
     serializedVersion: 2
     m_Curve:

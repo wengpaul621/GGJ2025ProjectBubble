@@ -110,7 +110,7 @@ public class RoundManager : MonoBehaviour
         }
 
         isGameEnd = true;
-
+        Generater.instance.ClearPreviousItems();
         // Determine the winner and display the result
         if (P1Defend.currentHealth > 0)
         {
@@ -126,6 +126,7 @@ public class RoundManager : MonoBehaviour
         {
             genePositionP1 = P1Defend.transform.position;
             P1Defend.gameObject.SetActive(false);
+            Instantiate(geneGameObjectP1, genePositionP1, Quaternion.identity);
             StartCoroutine(AnimateDelay(3f, "P2Win")); // Load scene after a 2-second delay
             StartCoroutine(LoadSceneWithDelay(6f)); // Load scene after a 2-second delay
         }

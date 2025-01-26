@@ -20004,10 +20004,11 @@ MonoBehaviour:
   - objPrefab: {fileID: 4804072477265691151, guid: 6a6c4abe1c6f50241a7b893ed1118c08, type: 3}
     objCount: {x: 2, y: 4}
   launchInterval: 0.1
-  launchDiffusAngle: 5
+  launchDiffusAngle: 2
   launchPressure: 1000
   launchPressurePercRange: {x: 0.4861089, y: 1}
   launchIntervalTimer: 0
+  BubbleGroup: {fileID: 0}
   ObjectPercMax: 0.0001
   ObjectPercMin: 0.0005
 --- !u!114 &7723179756219398014

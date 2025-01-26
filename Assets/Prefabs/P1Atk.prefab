@@ -281,6 +281,10 @@ PrefabInstance:
       propertyPath: ObjectPercMin
       value: 0.0005
       objectReference: {fileID: 0}
+    - target: {fileID: 2908964311612442142, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
+      propertyPath: launchDiffusAngle
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5272141239976166795, guid: ba3789a632b11cb4cbd05c1ebf76d45d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.01

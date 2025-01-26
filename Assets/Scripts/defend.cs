@@ -103,13 +103,15 @@ public class Defend : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("Bubble"))
+        if (collision.gameObject.tag == "Bubble")
         {
             Damage(damage);
             Instantiate(hitEffectPrefab, collision.collider.ClosestPoint(collision.transform.position), Quaternion.identity);
             Destroy(collision.gameObject);
         }
     }
+
+
 }
 
 // Enum for PlayerType (ensure this is defined elsewhere in your project if needed)

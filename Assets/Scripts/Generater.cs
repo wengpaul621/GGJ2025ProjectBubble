@@ -24,17 +24,33 @@ public class Generater : MonoBehaviour
     // 控制每回合生成的物体数量
     public int itemsToGenerate = 3;
 
+    public static Generater instance;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
-        GenerateItems();
+        
         // 初始时生成 3 个物体
     }
 
 
-    void GenerateItems()
+    public void GenerateItems()
     {
         // 清除场地上的旧物体（可选，看是否需要）
-        ClearPreviousItems();
+        
         Gene();
     }
 
@@ -59,7 +75,7 @@ public class Generater : MonoBehaviour
     }
 
     // 清除场地上的旧物体（如果需要的话）
-    void ClearPreviousItems()
+    public void ClearPreviousItems()
     {
         GameObject[] existingSpeed = GameObject.FindGameObjectsWithTag("speedUp");
         GameObject[] existingCloud = GameObject.FindGameObjectsWithTag("Cloud");

@@ -43,7 +43,7 @@ public class RoundManager : MonoBehaviour
     public Vector3 genePositionP2;
 
     public static RoundManager instance;
-
+    
     
     private void Awake()
     {
@@ -155,7 +155,7 @@ public class RoundManager : MonoBehaviour
         P2Defend.Reset();
         Player1Drink.Reset();
         Player2Drink.Reset();
-
+        Generater.instance.ClearPreviousItems();
     }
 
 
@@ -163,6 +163,7 @@ public class RoundManager : MonoBehaviour
     public void Player1End()
     {
         Debug.Log("P1End");
+        countdownText.gameObject.SetActive(false);
         ResetGame();
         animatorAnnouncement.SetTrigger("P2Turn");
 
@@ -176,6 +177,7 @@ public class RoundManager : MonoBehaviour
     public void Player2End()
     {
         Debug.Log("P2End");
+        countdownText.gameObject.SetActive(false);
         ResetGame();
         animatorAnnouncement.SetTrigger("P1Turn");
         AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
@@ -217,6 +219,7 @@ public class RoundManager : MonoBehaviour
         line.ReturnToOriginalPosition();
         countdownText.gameObject.SetActive(true);
 
+        Generater.instance.GenerateItems();
         // Stop previous countdown and start a new one
         if (countdownCoroutine != null)
         {
@@ -239,6 +242,8 @@ public class RoundManager : MonoBehaviour
         FieldPlayer2.SetActive(true);
         timer = countdownTime;
         line.MoveToTarget();
+        Generater.instance.GenerateItems();
+        countdownText.gameObject.SetActive(true);
         // Stop previous countdown and start a new one
         if (countdownCoroutine != null)
         {

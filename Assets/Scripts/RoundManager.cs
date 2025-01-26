@@ -40,6 +40,8 @@ public class RoundManager : MonoBehaviour
     public Vector3 genePositionP2;
 
     public static RoundManager instance;
+
+    
     private void Awake()
     {
         if (instance == null)
@@ -60,10 +62,11 @@ public class RoundManager : MonoBehaviour
         //timer = countdownTime;
         //StartCoroutine(CountdownRoutine());
     }
-
+    bool ifFirstRound = true;
     // Update is called once per frame
     void Update()
     {
+        
         // Handle game state based on the attack side
         switch (attackSide)
         {
@@ -108,19 +111,20 @@ public class RoundManager : MonoBehaviour
         // Determine the winner and display the result
         if (P1Defend.currentHealth > 0)
         {
-            animatorAnnouncement.SetTrigger("P1Win");
+            
             genePositionP2 = P2Defend.transform.position;
             P2Defend.gameObject.SetActive(false);
             Instantiate(geneGameObjectP2, genePositionP2, Quaternion.identity);
-            StartCoroutine(LoadSceneWithDelay(4f)); // Load scene after a 2-second delay
+            
+            StartCoroutine(AnimateDelay(3f, "P1Win")); // Load scene after a 2-second delay
+            StartCoroutine(LoadSceneWithDelay(6f)); // Load scene after a 2-second delay
         }
         else if (P2Defend.currentHealth > 0)
         {
-            animatorAnnouncement.SetTrigger("P2Win");
             genePositionP1 = P1Defend.transform.position;
             P1Defend.gameObject.SetActive(false);
-            Instantiate(geneGameObjectP1, genePositionP1, Quaternion.identity); // Ensure you are instantiating the correct object for P1
-            StartCoroutine(LoadSceneWithDelay(4f)); // Load scene after a 2-second delay
+            StartCoroutine(AnimateDelay(3f, "P2Win")); // Load scene after a 2-second delay
+            StartCoroutine(LoadSceneWithDelay(6f)); // Load scene after a 2-second delay
         }
     }
 
@@ -129,6 +133,12 @@ public class RoundManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(0); // Load the scene after the specified delay
+    }
+
+    private IEnumerator AnimateDelay(float delay, string triggerName)
+    {
+        yield return new WaitForSeconds(delay);
+        animatorAnnouncement.SetTrigger(triggerName);
     }
     public void ResetGame()
     {
@@ -173,8 +183,23 @@ public class RoundManager : MonoBehaviour
 
     }
 
+    public void GameStart()
+    {
+        if (ifFirstRound == true)
+        {
+            animatorAnnouncement.SetTrigger("P1Turn");
+
+            AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
+            foreach (var end in ends)
+            {
+                end.endAction += Playe1Round;
+            }
+            ifFirstRound = false;
+        }
+    }
     void Playe1Round()
     {
+
         AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
         foreach (var end in ends)
         {
@@ -185,6 +210,7 @@ public class RoundManager : MonoBehaviour
         FieldPlayer2.SetActive(false);
         timer = countdownTime;
         line.gameObject.SetActive(true);
+        line.ReturnToOriginalPosition();
         countdownText.gameObject.SetActive(true);
 
         // Stop previous countdown and start a new one
@@ -208,7 +234,7 @@ public class RoundManager : MonoBehaviour
         FieldPlayer1.SetActive(false);
         FieldPlayer2.SetActive(true);
         timer = countdownTime;
-
+        line.MoveToTarget();
         // Stop previous countdown and start a new one
         if (countdownCoroutine != null)
         {

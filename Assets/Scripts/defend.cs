@@ -15,8 +15,10 @@ public class Defend : MonoBehaviour
     public Animator animator;
     public float damage = 5;
 
+    public Vector3 originalPos;
     public void Reset()
     {
+        originalPos = transform.localPosition;
         SetMoveSpeed(moveSpeed);
     }
     void Start()
@@ -25,6 +27,7 @@ public class Defend : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth); // Ensure this is implemented in your HealthSystem class
         Reset();
+        transform.localPosition = originalPos;
     }
 
     void Update()
@@ -90,6 +93,7 @@ public class Defend : MonoBehaviour
         if (currentHealth < 0) currentHealth = 0; // Prevent health from going negative
         healthBar.SetHealth(currentHealth); // Update the health bar
         animator.SetTrigger("Hurt");
+        AudioManager.instance.PlaySFX("Hit");
         
         
     }

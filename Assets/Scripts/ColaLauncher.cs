@@ -76,6 +76,7 @@ public class ColaLauncher : MonoBehaviour
                 launchForce *= launchPressure;
                 launchForce *= Random.Range(launchPressurePercRange.x, launchPressurePercRange.y);
                 newBubble.GetComponent<Rigidbody2D>().AddForce(launchForce);
+                AudioManager.instance.PlaySFXLoop("Shoot");
             }
         }
     }

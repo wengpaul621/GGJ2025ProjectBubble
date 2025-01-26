@@ -6,7 +6,7 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public Sound[] musicSounds, sfxSounds;
+    public Sound[] musicSounds, sfxSounds, loopSfxSounds;
     public AudioSource musicSource, sfxSource, loopSfxSource; // Add a separate AudioSource for looped SFX
 
     private Dictionary<string, AudioSource> loopedSfxSources = new Dictionary<string, AudioSource>();

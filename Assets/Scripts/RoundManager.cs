@@ -126,21 +126,33 @@ public class RoundManager : MonoBehaviour
             
             genePositionP2 = P2Defend.transform.position;
             P2Defend.gameObject.SetActive(false);
+            
             Instantiate(geneGameObjectP2, genePositionP2, Quaternion.identity);
             
-            StartCoroutine(AnimateDelay(3f, "P1Win")); // Load scene after a 2-second delay
-            StartCoroutine(LoadSceneWithDelay(6f)); // Load scene after a 2-second delay
+            AudioManager.instance.PlaySFX("Dead");
+            StartCoroutine(AnimateDelay(2f, "P1Win")); // Load scene after a 2-second delay
+            StartCoroutine(PlayVictorySFXWithDelay(2f)); // Play victory sound after delay
+            StartCoroutine(LoadSceneWithDelay(5f)); // Load scene after a 2-second delay
         }
         else if (P2Defend.currentHealth > 0)
         {
             genePositionP1 = P1Defend.transform.position;
             P1Defend.gameObject.SetActive(false);
+            
             Instantiate(geneGameObjectP1, genePositionP1, Quaternion.identity);
-            StartCoroutine(AnimateDelay(3f, "P2Win")); // Load scene after a 2-second delay
-            StartCoroutine(LoadSceneWithDelay(6f)); // Load scene after a 2-second delay
+            AudioManager.instance.PlaySFX("Dead");
+
+            StartCoroutine(AnimateDelay(2f, "P2Win")); // Load scene after a 2-second delay
+            StartCoroutine(PlayVictorySFXWithDelay(2f)); // Play victory sound after delay
+            StartCoroutine(LoadSceneWithDelay(5f)); // Load scene after a 2-second delay
         }
     }
-
+    private IEnumerator PlayVictorySFXWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AudioManager.instance.PlaySFX("Vt");
+        Debug.Log("Victory SFX should be playing now");
+    }
     // Coroutine to load the scene with a delay
     private IEnumerator LoadSceneWithDelay(float delay)
     {
@@ -151,7 +163,9 @@ public class RoundManager : MonoBehaviour
     private IEnumerator AnimateDelay(float delay, string triggerName)
     {
         yield return new WaitForSeconds(delay);
+        
         animatorAnnouncement.SetTrigger(triggerName);
+        
     }
     public void ResetGame()
     {
@@ -177,7 +191,7 @@ public class RoundManager : MonoBehaviour
         countdownText.gameObject.SetActive(false);
         ResetGame();
         animatorAnnouncement.SetTrigger("P2Turn");
-
+        AudioManager.instance.PlaySFX("Change");
         AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
         foreach(var end in ends)
         {
@@ -191,6 +205,7 @@ public class RoundManager : MonoBehaviour
         countdownText.gameObject.SetActive(false);
         ResetGame();
         animatorAnnouncement.SetTrigger("P1Turn");
+        AudioManager.instance.PlaySFX("Change");
         AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
         foreach (var end in ends)
         {
@@ -205,7 +220,7 @@ public class RoundManager : MonoBehaviour
         if (ifFirstRound == true)
         {
             animatorAnnouncement.SetTrigger("P1Turn");
-
+            AudioManager.instance.PlaySFX("Change");
             AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
             foreach (var end in ends)
             {
@@ -216,12 +231,13 @@ public class RoundManager : MonoBehaviour
     }
     void Playe1Round()
     {
-
+        attackSide = AttackSide.Player1;
         AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
         foreach (var end in ends)
         {
             end.endAction -= Playe1Round;
         }
+        
         isGaming = true;
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
@@ -246,7 +262,7 @@ public class RoundManager : MonoBehaviour
         {
             end.endAction -= Playe2Round;
         }
-
+        
         Debug.Log("P2Round");
         attackSide = AttackSide.Player2;
         FieldPlayer1.SetActive(false);

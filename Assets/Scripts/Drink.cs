@@ -36,6 +36,7 @@ public class Drink : MonoBehaviour
     public float intensity;
     public float frequency;
 
+    public Animator animator;
 
     public void Reset()
     {
@@ -110,6 +111,8 @@ public class Drink : MonoBehaviour
                 break;
         }
 
+        if(moveDirection!=0f) { animator.SetBool("isMoving", true); }
+        else { animator.SetBool("isMoving", false); }
         // 使用全局坐标系移动
         transform.parent.Translate(Vector3.up * moveDirection * moveSpeed * Time.deltaTime, Space.World);
     }

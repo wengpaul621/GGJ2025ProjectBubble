@@ -5,6 +5,7 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     // Start is called before the first frame update
+    public RoundManager round;
     public Defend player;
     private int effect;
 
@@ -25,20 +26,12 @@ public class Circle : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("speedUp"))
         {
-            //animator.SetTrigger("Break");
+
             Debug.Log("take");
-            Destroy(gameObject);
-            //effect = Random.Range(0, 2);
-            //if (effect > 0)
-            //{
-            //    StartCoroutine(ApplyBuff());
-            //}
-            //else
-            //{
-            //    GenerateWall();
-            //}
+            Destroy(collision.gameObject);
+            StartCoroutine(ApplyBuff());
         }
     }
 
@@ -69,6 +62,18 @@ public class Circle : MonoBehaviour
         player.SetMoveSpeed(3f);
     }
 
+    public void Update()
+    {
+        if (round.attackSide == 0)//player1's trun
+        {
+            player = round.P2Defend;
+        }
+        else
+        {
+            player = round.P1Defend;
+        }
+    }
+
     private void GenerateWall()
     {
         // Create a new wall from the prefab
@@ -91,10 +96,7 @@ public class Circle : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update()
-    {
-        
-    }
+
 
     
 }

@@ -26,8 +26,8 @@ public class Generater : MonoBehaviour
 
     void Start()
     {
-        // 初始时生成 3 个物体
         GenerateItems();
+        // 初始时生成 3 个物体
     }
 
     void GenerateItems()
@@ -35,13 +35,8 @@ public class Generater : MonoBehaviour
         // 清除场地上的旧物体（可选，看是否需要）
         ClearPreviousItems();
 
-        // 根据当前回合生成 3 个物体
-        for (int i = 0; i < itemsToGenerate; i++)
-        {
-            GameObject itemToSpawn = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
-            Vector3 spawnPosition = GetRandomSpawnPosition();
-            Instantiate(itemToSpawn, spawnPosition, Quaternion.identity);
-        }
+        InvokeRepeating("Gene", 1f, 0.05f);
+
     }
 
     // 获取当前回合的随机生成位置
@@ -82,5 +77,17 @@ public class Generater : MonoBehaviour
 
         // 生成新物体
         GenerateItems();
+    }
+
+    public void Gene()
+    {
+        float rand = Random.Range(0, 1000);
+        if (rand <= 8)
+        {
+            Debug.Log("Gene bubble");
+            GameObject itemToSpawn = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+            Vector3 spawnPosition = GetRandomSpawnPosition();
+            Instantiate(itemToSpawn, spawnPosition, Quaternion.identity);
+        }
     }
 }

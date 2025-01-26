@@ -26,14 +26,31 @@ public class Circle : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("speedUp"))
+        if (collision.CompareTag("Player"))
         {
-
             Debug.Log("take");
-            Destroy(collision.gameObject);
+
+            // Get the Defend component from the player
+            player = collision.gameObject.GetComponent<Defend>();
+
+            // Start the ApplyBuff coroutine
             StartCoroutine(ApplyBuff());
+
+            // Disable the SpriteRenderer and Collider2D components
+            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            Collider2D collider = gameObject.GetComponent<Collider2D>();
+
+            if (spriteRenderer != null)
+                spriteRenderer.enabled = false;
+
+            if (collider != null)
+                collider.enabled = false;
+
+            // Optionally, you can also destroy the game object or disable it entirely if needed
+            // Destroy(gameObject); // Or gameObject.SetActive(false);
         }
     }
+
 
     public IEnumerator ApplyBuff()
     {
@@ -60,18 +77,19 @@ public class Circle : MonoBehaviour
     public void RemoveSpeedUp()
     {
         player.SetMoveSpeed(5f);
+        Destroy(gameObject);
     }
 
     public void Update()
     {
-        if (round.attackSide == RoundManager.AttackSide.Player1)//player1's trun
-        {
-            player = round.P2Defend;
-        }
-        else
-        {
-            player = round.P1Defend;
-        }
+        //if (round.attackSide == RoundManager.AttackSide.Player1)//player1's trun
+        //{
+        //    player = round.P2Defend;
+        //}
+        //else
+        //{
+        //    player = round.P1Defend;
+        //}
     }
 
     private void GenerateWall()

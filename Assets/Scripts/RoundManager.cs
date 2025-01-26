@@ -43,7 +43,8 @@ public class RoundManager : MonoBehaviour
     public Vector3 genePositionP2;
 
     public static RoundManager instance;
-    
+
+    public GameObject BubbleGroup;
     
     private void Awake()
     {
@@ -61,9 +62,17 @@ public class RoundManager : MonoBehaviour
     void Start()
     {
 
-        //Playe1Round();
-        //timer = countdownTime;
-        //StartCoroutine(CountdownRoutine());
+        gene = FindObjectOfType<Generater>();
+
+        // Optionally, you can check if the gene was found
+        if (gene != null)
+        {
+            Debug.Log("Found Generater in the scene.");
+        }
+        else
+        {
+            Debug.LogWarning("Generater not found in the scene.");
+        }
     }
     bool ifFirstRound = true;
     // Update is called once per frame
@@ -157,6 +166,7 @@ public class RoundManager : MonoBehaviour
         Player1Drink.Reset();
         Player2Drink.Reset();
         Generater.instance.ClearPreviousItems();
+        ClearBubble();
     }
 
 
@@ -290,6 +300,23 @@ public class RoundManager : MonoBehaviour
         {
             Player2End();
             //StartCoroutine(StartTimer(break_time, 1));
+        }
+    }
+
+    public void ClearBubble()
+    {
+        // Ensure the BubbleGroup is not null
+        if (BubbleGroup != null)
+        {
+            // Loop through all child objects of BubbleGroup and destroy them
+            foreach (Transform child in BubbleGroup.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("BubbleGroup is not assigned.");
         }
     }
 }

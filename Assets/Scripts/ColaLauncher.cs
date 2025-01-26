@@ -21,6 +21,7 @@ public class ColaLauncher : MonoBehaviour
 
     Drink drink;
 
+    public GameObject BubbleGroup;
     public float ObjectPercMax = 0.0005f;
     public float ObjectPercMin = 0.001f;
 
@@ -68,6 +69,7 @@ public class ColaLauncher : MonoBehaviour
             for (int k = 0; k < launchCount; k++)
             {
                 GameObject newBubble = Instantiate(launchObjInfos[i].objPrefab, launchPoint.transform.position, launchPoint.transform.rotation);
+                newBubble.transform.SetParent(BubbleGroup.transform);
                 newBubble.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Random.value * 360.0f);
                 Vector2 launchForce = (launchDirHelper.position - launchPoint.position).normalized;
                 launchForce = Quaternion.Euler(0.0f, 0.0f, Random.Range(-launchDiffusAngle, launchDiffusAngle)) * launchForce;
@@ -84,4 +86,6 @@ public class ColaLauncher : MonoBehaviour
         [HorizontalGroup("Group")] [HideLabel] public GameObject objPrefab;
         [HorizontalGroup("Group")] [HideLabel] public Vector2Int objCount;
     }
+
+
 }

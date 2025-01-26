@@ -19940,6 +19940,7 @@ MonoBehaviour:
   capacity: 7500
   intensity: 1
   frequency: 1
+  animator: {fileID: 0}
 --- !u!61 &7580448294810495947
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20036,12 +20037,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9102402981552880698}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.86, y: 0.01, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -1.96, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2340941065583228671}
   - {fileID: 5192931649732274593}
   m_Father: {fileID: 8699909773954875482}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}

@@ -111,13 +111,13 @@ public class RoundManager : MonoBehaviour
         if(P1Defend.currentHealth > 0)
         {
             animatorAnnouncement.SetTrigger("P1Win");
-            Instantiate(geneGameObjectP2, genePositionP2, Quaternion.identity);
+            //Instantiate(geneGameObjectP2, genePositionP2, Quaternion.identity);
 
         }
         else if(P2Defend.currentHealth > 0)
         {
             animatorAnnouncement.SetTrigger("P2Win");
-            Instantiate(geneGameObjectP2, genePositionP1, Quaternion.identity);
+            //Instantiate(geneGameObjectP2, genePositionP1, Quaternion.identity);
         }
     }
     public void ResetGame()
@@ -236,10 +236,12 @@ public class RoundManager : MonoBehaviour
         Debug.Log("Countdown finished!");
         if (attackSide == AttackSide.Player1)
         {
+            Player1End();
             //StartCoroutine(StartTimer(break_time, 0));
         }
         else if (attackSide == AttackSide.Player2)
         {
+            Player2End();
             //StartCoroutine(StartTimer(break_time, 1));
         }
     }

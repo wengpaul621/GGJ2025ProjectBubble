@@ -13,6 +13,9 @@ public class RoundManager : MonoBehaviour
         Player1,
         Player2
     }
+
+    public Generater gene;
+
     public AttackSide attackSide;
     public GameObject FieldPlayer1;
     public GameObject FieldPlayer2;
@@ -132,6 +135,7 @@ public class RoundManager : MonoBehaviour
     }
     public void ResetGame()
     {
+        gene.SwitchRound();
         if (countdownCoroutine != null)
         {
             StopCoroutine(countdownCoroutine);

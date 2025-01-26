@@ -54,12 +54,12 @@ public class Circle : MonoBehaviour
 
     public void SpeedUpApply()
     {
-        player.SetMoveSpeed(5f);
+        player.SetMoveSpeed(7f);
     }
 
     public void RemoveSpeedUp()
     {
-        player.SetMoveSpeed(3f);
+        player.SetMoveSpeed(5f);
     }
 
     public void Update()

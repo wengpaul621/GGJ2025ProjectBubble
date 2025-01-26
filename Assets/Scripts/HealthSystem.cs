@@ -42,6 +42,6 @@ public class HealthSystem : MonoBehaviour
         }
 
         // Ensure the final value is set precisely
-        healthBar.fillAmount = targetHealth;
+        //healthBar.fillAmount = targetHealth;
     }
 }

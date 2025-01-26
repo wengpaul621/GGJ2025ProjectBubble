@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviour
 {
-    public static RoundManager instance;
-    // Enum for player type
     public enum AttackSide
     {
         Player1,
@@ -30,7 +28,6 @@ public class RoundManager : MonoBehaviour
 
     private float timer;
 
-    private AnimatorStateInfo info;
     public LineMove line;
     bool isGaming=false;
 
@@ -42,6 +39,7 @@ public class RoundManager : MonoBehaviour
     public Vector3 genePositionP1;
     public Vector3 genePositionP2;
 
+    public static RoundManager instance;
     private void Awake()
     {
         if (instance == null)
@@ -159,13 +157,6 @@ public class RoundManager : MonoBehaviour
         {
             end.endAction += Playe2Round;
         }
-
-        //info = animatorAnnouncement.GetCurrentAnimatorStateInfo(0);
-        //if (info.normalizedTime >= 1) // �ж϶������Ž���normalizedTime��ֵΪ0~1��0Ϊ��ʼ��1Ϊ������
-        //{
-        //    Playe2Round();
-        //}
-       
     }
 
     public void Player2End()
@@ -173,34 +164,22 @@ public class RoundManager : MonoBehaviour
         Debug.Log("P2End");
         ResetGame();
         animatorAnnouncement.SetTrigger("P1Turn");
-        info = animatorAnnouncement.GetCurrentAnimatorStateInfo(0);
-        if (info.normalizedTime >= 1) // �ж϶������Ž���normalizedTime��ֵΪ0~1��0Ϊ��ʼ��1Ϊ������
+        AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
+        foreach (var end in ends)
         {
-            Playe1Round();
+            end.endAction += Playe1Round;
         }
 
-        
-    }
 
-    private Coroutine countdownCoroutine;
-
-    IEnumerator CountdownRoutine()
-    {
-        while (timer > 0)
-        {
-            UpdateCountdownDisplay();
-            yield return new WaitForSeconds(0.01f);
-            timer -= 0.01f;
-        }
-
-        // When the countdown reaches 0, update the display and trigger an event
-        timer = 0; // Ensure timer doesn't go negative
-        UpdateCountdownDisplay();
-        CountdownFinished();
     }
 
     void Playe1Round()
     {
+        AnimationEnd[] ends = animatorAnnouncement.GetBehaviours<AnimationEnd>();
+        foreach (var end in ends)
+        {
+            end.endAction -= Playe1Round;
+        }
         isGaming = true;
         FieldPlayer1.SetActive(true);
         FieldPlayer2.SetActive(false);
@@ -237,6 +216,26 @@ public class RoundManager : MonoBehaviour
         }
         countdownCoroutine = StartCoroutine(CountdownRoutine());
     }
+
+
+    private Coroutine countdownCoroutine;
+
+    IEnumerator CountdownRoutine()
+    {
+        while (timer > 0)
+        {
+            UpdateCountdownDisplay();
+            yield return new WaitForSeconds(0.01f);
+            timer -= 0.01f;
+        }
+
+        // When the countdown reaches 0, update the display and trigger an event
+        timer = 0; // Ensure timer doesn't go negative
+        UpdateCountdownDisplay();
+        CountdownFinished();
+    }
+
+
 
     void UpdateCountdownDisplay()
     {

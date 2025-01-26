@@ -16337,7 +16337,7 @@ Transform:
   m_GameObject: {fileID: 435868376}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.29, y: -2.3899999, z: -0.021232959}
+  m_LocalPosition: {x: -5.16, y: -2.3899999, z: -0.021232959}
   m_LocalScale: {x: 0.18867926, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -16508,6 +16508,7 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 7802641215399291206, guid: 4778403971ddbd04384c67884c69bdd1, type: 3}
   animator: {fileID: 435868378}
   damage: 5
+  originalPos: {x: 0, y: 0, z: 0}
 --- !u!1 &445461991
 GameObject:
   m_ObjectHideFlags: 0
@@ -33857,6 +33858,7 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 7802641215399291206, guid: 4778403971ddbd04384c67884c69bdd1, type: 3}
   animator: {fileID: 1313730396}
   damage: 5
+  originalPos: {x: 0, y: 0, z: 0}
 --- !u!212 &1313730392
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33918,7 +33920,7 @@ Transform:
   m_GameObject: {fileID: 1313730390}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.24, y: -2.33, z: -0.021232959}
+  m_LocalPosition: {x: 9.82, y: -2.33, z: -0.021232959}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -46006,7 +46008,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1893008524
 Transform:
   m_ObjectHideFlags: 0

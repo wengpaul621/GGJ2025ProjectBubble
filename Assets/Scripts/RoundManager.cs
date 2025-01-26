@@ -228,6 +228,8 @@ public class RoundManager : MonoBehaviour
             }
             ifFirstRound = false;
         }
+        P1Defend.originalPos = P1Defend.transform.localPosition;
+        P2Defend.originalPos = P2Defend.transform.localPosition;
     }
     void Playe1Round()
     {

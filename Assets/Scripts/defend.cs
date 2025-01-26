@@ -18,7 +18,7 @@ public class Defend : MonoBehaviour
     public Vector3 originalPos;
     public void Reset()
     {
-        originalPos = transform.localPosition;
+        transform.localPosition = originalPos;
         SetMoveSpeed(moveSpeed);
     }
     void Start()
@@ -27,7 +27,8 @@ public class Defend : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth); // Ensure this is implemented in your HealthSystem class
         Reset();
-        transform.localPosition = originalPos;
+        
+        
     }
 
     void Update()
